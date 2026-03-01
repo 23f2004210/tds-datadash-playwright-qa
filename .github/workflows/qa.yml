@@ -1,0 +1,26 @@
+name: DataDash QA
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  run-playwright:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          pip install playwright
+          playwright install
+
+      - name: Run QA Script - 23f2004210@ds.study.iitm.ac.in
+        run: python scrape.py
